@@ -1,4 +1,4 @@
-import { Task } from '../models'
+const { Task } = require('../models')
 /**
  * in-memory storage , since we don't need database to store the tasks
  */
@@ -40,7 +40,7 @@ async function getAllTask(page = 1, pageSize = 10) {
 async function getTaskById(id) {
     const task = tasks.find((task) => task.id === id);
 
-    if (!task) {
+    if(!task) {
         throw new Error('Task not found!');
     }
 
@@ -85,8 +85,8 @@ async function createTask(title, description) {
  */
 async function updateTask(id, title, description, completed) {
     // Find the task index to be updated
-    const taskIndex = await (getTaskById(id)).id;
-
+    const task = getTaskById(id);
+    const taskIndex = tasks.indexOf(task)
     // Check for empty inputs
     if (!title) {
         throw new Error('Task title should not be empty');
@@ -113,7 +113,8 @@ async function updateTask(id, title, description, completed) {
  * @returns {boolean} - `true` if the task is deleted.
  */
 async function deleteTask(id) {
-    const taskIndex = await (getTaskById(id)).id;
+    const task = getTaskById(id);
+    const taskIndex = tasks.indexOf(task)
 
     if (taskIndex === -1) {
         throw new Error('Task to be deleted not found');
