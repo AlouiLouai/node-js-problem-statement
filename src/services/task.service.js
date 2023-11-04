@@ -3,6 +3,10 @@ const { Task } = require('../models')
  * in-memory storage , since we don't need database to store the tasks
  */
 const tasks = []
+/**
+ * this is responsible for auto-increment for in-memroy storing
+ */
+let nextTaskId = 1;
 
 /**
  * Retrieve a paginated list of tasks.
@@ -39,11 +43,9 @@ async function getAllTask(page = 1, pageSize = 10) {
  */
 async function getTaskById(id) {
     const task = tasks.find((task) => task.id === id);
-
-    if(!task) {
+    if (!task) {
         throw new Error('Task not found!');
     }
-
     return task;
 }
 
@@ -65,12 +67,13 @@ async function createTask(title, description) {
     }
     // Create the task
     const newTask = new Task(
-        tasks.length + 1,
+        nextTaskId,
         title,
         description,
         false
     )
     tasks.push(newTask);
+    nextTaskId++;
     return newTask
 }
 
@@ -85,8 +88,8 @@ async function createTask(title, description) {
  */
 async function updateTask(id, title, description, completed) {
     // Find the task index to be updated
-    const task = getTaskById(id);
-    const taskIndex = tasks.indexOf(task)
+    const taskIndex = tasks.findIndex(task => task.id === id);
+    console.log('taskndex : ', taskIndex)
     // Check for empty inputs
     if (!title) {
         throw new Error('Task title should not be empty');
@@ -94,7 +97,9 @@ async function updateTask(id, title, description, completed) {
     if (!description) {
         throw new Error('Task description should not be empty');
     }
-
+    if (taskIndex === -1) {
+        throw new Error('Task not found');
+    }
     // Update the task
     tasks[taskIndex] = {
         ...tasks[taskIndex],
@@ -115,13 +120,12 @@ async function updateTask(id, title, description, completed) {
 async function deleteTask(id) {
     const task = getTaskById(id);
     const taskIndex = tasks.indexOf(task)
-
-    if (taskIndex === -1) {
-        throw new Error('Task to be deleted not found');
+    if (taskIndex !== -1) {
+        tasks.splice(taskIndex, 1);
+        return true;
+    } else {
+        throw new Error('Task not found');
     }
-
-    tasks.splice(taskIndex, 1);
-    return true;
 }
 
 module.exports = {
