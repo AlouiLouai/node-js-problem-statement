@@ -26,7 +26,7 @@ async function createTask(req, res) {
  */
 async function getAllTasks(req, res) {
   try {
-    const { page, pageSize } = req.query;
+    const { page = 1, pageSize = 5 } = req.query;
     const result = await taskService.getAllTask(parseInt(page), parseInt(pageSize));
     res.status(200).json(result);
   } catch (error) {
@@ -82,7 +82,8 @@ async function updateTask(req, res) {
 async function deleteTask(req, res) {
   try {
     const taskId = parseInt(req.params.id);
-    await taskService.deleteTask(taskId);
+    console.log('taskId :', taskId)
+    taskService.deleteTask(taskId);
     res.status(204).end();
   } catch (error) {
     res.status(404).json({ error: error.message });

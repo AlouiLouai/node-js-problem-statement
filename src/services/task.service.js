@@ -89,7 +89,6 @@ async function createTask(title, description) {
 async function updateTask(id, title, description, completed) {
     // Find the task index to be updated
     const taskIndex = tasks.findIndex(task => task.id === id);
-    console.log('taskndex : ', taskIndex)
     // Check for empty inputs
     if (!title) {
         throw new Error('Task title should not be empty');
@@ -119,8 +118,8 @@ async function updateTask(id, title, description, completed) {
  */
 async function deleteTask(id) {
     const task = getTaskById(id);
-    const taskIndex = tasks.indexOf(task)
-    if (taskIndex !== -1) {
+    if (task) {
+        const taskIndex = tasks.indexOf(task);
         tasks.splice(taskIndex, 1);
         return true;
     } else {
