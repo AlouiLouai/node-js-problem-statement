@@ -39,12 +39,12 @@ This project is a RESTful API for managing tasks. It provides basic CRUD operati
 
 To use the API, you can make HTTP requests to the following endpoints:
 
-GET /tasks: Retrieve a list of all tasks.
-GET /tasks?page=(number)&pageSize(number) Retrieve a list of all tasks paginated.
-GET /tasks/:id: Retrieve a single task by its ID.
-POST /tasks: Create a new task.
-PUT /tasks/:id: Update an existing task by its ID.
-DELETE /tasks/:id: Delete a task by its ID.
+- GET /tasks: Retrieve a list of all tasks.
+- GET /tasks?page=(number)&pageSize(number) Retrieve a list of all tasks paginated.
+- GET /tasks/:id: Retrieve a single task by its ID.
+- POST /tasks: Create a new task.
+- PUT /tasks/:id: Update an existing task by its ID.
+- DELETE /tasks/:id: Delete a task by its ID.
 
 For example, to create a new task, you can send a POST request to http://localhost:3000/tasks with a JSON body containing the task details.
 
