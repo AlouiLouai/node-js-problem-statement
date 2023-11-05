@@ -8,7 +8,7 @@ A simple RESTful API for managing tasks using Node.js and Express.js.
 - [Features](#features)
 - [Installation](#installation)
 - [Usage](#usage)
-- [API Documentation](#api-documentation)
+- [API Documentation](#api-documentation) 
 - [Testing](#testing)
 
 ## Introduction
@@ -50,7 +50,13 @@ For example, to create a new task, you can send a POST request to http://localho
 
 #### API Documentation
 
-https://api.postman.com/collections/25832877-96163c38-7c74-4682-bb5c-49ab43e68bb4?access_key=PMAT-01HEDGWH4W1RS07VTZW2CDVYW3
+- [API Documentation](ApiDocumentation.md)
+
+OR
+
+- https://api.postman.com/collections/25832877-96163c38-7c74-4682-bb5c-49ab43e68bb4?access_key=PMAT-01HEDGWH4W1RS07VTZW2CDVYW3
+
+
 
 #### Testing
 
